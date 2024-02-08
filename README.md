@@ -1,4 +1,4 @@
-#GitHub Repo for Cameron Albers and Austin Silva
+# GitHub Repo for Cameron Albers and Austin Silva
 
 Due Dates:
 
@@ -7,6 +7,6 @@ Due Dates:
 **Parent/Child Functions**
  
  
-##Program 2: 2/28/24
+## Program 2: 2/28/24
 
 **Multi-threaded Programming**
