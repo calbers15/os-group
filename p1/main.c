@@ -5,8 +5,17 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-int main(int argc, char *argv[]){
-    
+int main(){
+    pid_t pid;
+    pid = fork();
+
+    if(pid > 0){
+        wait(NULL);
+        printf("Parent Process\n");
+    }
+    else if(pid == 0){
+        printf("Child Process\n");
+    }
 
     return 0;
 }
