@@ -9,4 +9,4 @@ add_executable(p1
     main.c
 )
 
-target_compile_options(ind_proj_1 PRIVATE -Wall -Wextra)
+target_compile_options(p1 PRIVATE -Wall -Wextra)
