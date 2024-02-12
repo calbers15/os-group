@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(ind_proj_1)
+project(p1)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(ind_proj_1 
-    ind_proj_1.cpp
+add_executable(p1 
+    main.c
 )
 
 target_compile_options(ind_proj_1 PRIVATE -Wall -Wextra)
