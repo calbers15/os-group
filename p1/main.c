@@ -12,6 +12,7 @@ int main(){
     if(pid > 0){
         printf("Waiting for child to finish\n");
         wait(NULL);
+        printf("Child Completed\n\n");
         printf("Parent Process\n");
         printf("Parent ID: %d\n\n", (int) getpid());
     }
