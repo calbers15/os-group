@@ -13,11 +13,11 @@ int main(){
         printf("Waiting for child to finish\n");
         wait(NULL);
         printf("Parent Process\n");
-        printf("Parent ID: %d", (int) getpid());
+        printf("Parent ID: %d\n\n", (int) getpid());
     }
     else if(pid == 0){
         printf("Child Process\n");
-        printf("Child ID: %d", (int) getpid());
+        printf("Child ID: %d\n\n", (int) getpid());
 
     }
 
