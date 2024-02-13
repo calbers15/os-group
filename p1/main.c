@@ -19,6 +19,7 @@ int main(){
     else if(pid == 0){
         printf("Child Process\n");
         printf("Child ID: %d\n\n", (int) getpid());
+        printf("Child Finished\n\n");
 
     }
 
