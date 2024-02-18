@@ -6,29 +6,27 @@
 #include <sys/types.h>
 
 int main(){
-    pid_t pid1, pid2;
+    pid_t pid;
     printf("Parent Process\n");
     printf("Parent ID: %d\n\n", (int) getpid());
-    pid1 = fork();
-    
-    if (pid1 == 0){
-        printf("Child 1 Process\n");
-        printf("Child 1 ID: %d\n", (int) getpid());
-        printf("Child 1 Complete\n\n");
-    }
-
-    else{
-        printf("Parent creating Child Process 2\n");
-        pid2 = fork();
-        if(pid2 == 0){
-            printf("Child 2 Process\n");
-            printf("Child 2 ID: %d\n", (int) getpid());
+    for (int i = 0; i < 5; i++){
+        pid= fork();
+        //If process creation fails - code taken from figure 5.1 textbook
+        if(pid < 0){
+            printf("Fork failed\n");
+            exit(1);
         }
+
+        else if(pid == 0){
+            printf("Child Process %d\n", i);
+            printf("Child %d ID: %d\n\n", i, (int) getpid());
+            exit(0);
+        }
+
         else{
             wait(NULL);
-            printf("Child 2 Complete\n\n");
+            printf("Child %d with ID %d finished\n\n", i, (int) getpid());
         }
-
     }
     return 0;
 }
