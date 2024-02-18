@@ -19,8 +19,8 @@ int main(){
 
         else if(pid == 0){
             printf("Child Process %d\n", i);
-            printf("Child %d ID: %d\n\n", i, getpid());
-            printf("Child %d with ID %d finished successfully", i, getpid());
+            printf("Child %d ID: %d\n", i, getpid());
+            printf("Child %d with ID %d finished successfully\n\n", i, getpid());
             exit(0);
         }
     }
