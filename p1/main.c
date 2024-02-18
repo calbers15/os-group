@@ -19,14 +19,15 @@ int main(){
 
         else if(pid == 0){
             printf("Child Process %d\n", i);
-            printf("Child %d ID: %d\n\n", i, (int) getpid());
+            printf("Child %d ID: %d\n\n", i, getpid());
+            printf("Child %d with ID %d finished successfully", i, getpid());
             exit(0);
         }
+    }
 
-        else{
-            wait(NULL);
-            printf("Child %d with ID %d finished\n\n", i, (int) getpid());
-        }
+
+    for (int i = 0; i < 5; i++){
+        wait(NULL);
     }
     return 0;
 }
