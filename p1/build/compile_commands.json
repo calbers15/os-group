@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/cdog1/Documents/eece-4811/os-group/p1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g -Wall -Wextra -o CMakeFiles\\p1.dir\\main.c.obj -c C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\main.c",
+  "file": "C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\main.c",
+  "output": "CMakeFiles\\p1.dir\\main.c.obj"
+}
+]
