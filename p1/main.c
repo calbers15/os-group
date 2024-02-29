@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     printf("Parent ID: %d\n\n", (int) getpid());
 
     int arg;
-    arg = stoi(argv[1]);
+    arg = atoi(argv[1]);
 
     for (int i = 0; i < arg; i++){
         pid = fork();
