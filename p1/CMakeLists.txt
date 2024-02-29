@@ -14,6 +14,7 @@ add_executable(t1
 add_executable(t2
     test2.c
 )
+target_link_libraries(t2 m)
 add_executable(t3
     test3.c
 )

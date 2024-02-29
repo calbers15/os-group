@@ -131,7 +131,7 @@ build CMakeFiles/t2.dir/test2.c.obj: C_COMPILER__t2_unscanned_Debug C$:/Users/cd
 
 build t2.exe: C_EXECUTABLE_LINKER__t2_Debug CMakeFiles/t2.dir/test2.c.obj
   FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = -lm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\t2.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
