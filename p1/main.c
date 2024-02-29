@@ -24,6 +24,7 @@ int main(int argc, char *argv[]){
         else if(pid == 0){
             printf("Child Process %d\n", i);
             printf("Child %d ID: %d\n", i, getpid());
+            execlp("./test1.c", "test1", NULL);
             printf("Child %d with ID %d finished successfully\n\n", i, getpid());
             exit(0);
         }
