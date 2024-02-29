@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
     printf("Parent Process\n");
     printf("Parent ID: %d\n\n", (int) getpid());
     for (int i = 0; i < 5; i++){
-        pid= fork();
+        pid = fork();
         //If process creation fails - code taken from figure 5.1 textbook
         if(pid < 0){
             printf("Fork failed\n");
