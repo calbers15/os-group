@@ -25,7 +25,10 @@ int main(int argc, char *argv[]){
         else if(pid == 0){
             printf("Child Process %d\n", i);
             printf("Child %d ID: %d\n", i, getpid());
-            execlp("./t1", "t1", NULL);
+
+            char executable[10];
+            sprintf(executable,"./t%d", i+1);
+            execlp(executable, executable, NULL);
             exit(0);
         }
         else{
