@@ -73,6 +73,171 @@ build p1.exe: C_EXECUTABLE_LINKER__p1_Debug CMakeFiles/p1.dir/main.c.obj
   TARGET_IMPLIB = libp1.dll.a
   TARGET_PDB = p1.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target t1
+
+
+#############################################
+# Order-only phony target for t1
+
+build cmake_object_order_depends_target_t1: phony || CMakeFiles/t1.dir
+
+build CMakeFiles/t1.dir/test1.c.obj: C_COMPILER__t1_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test1.c || cmake_object_order_depends_target_t1
+  DEP_FILE = CMakeFiles\t1.dir\test1.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\t1.dir
+  OBJECT_FILE_DIR = CMakeFiles\t1.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target t1
+
+
+#############################################
+# Link the executable t1.exe
+
+build t1.exe: C_EXECUTABLE_LINKER__t1_Debug CMakeFiles/t1.dir/test1.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\t1.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = t1.exe
+  TARGET_IMPLIB = libt1.dll.a
+  TARGET_PDB = t1.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target t2
+
+
+#############################################
+# Order-only phony target for t2
+
+build cmake_object_order_depends_target_t2: phony || CMakeFiles/t2.dir
+
+build CMakeFiles/t2.dir/test2.c.obj: C_COMPILER__t2_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test2.c || cmake_object_order_depends_target_t2
+  DEP_FILE = CMakeFiles\t2.dir\test2.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\t2.dir
+  OBJECT_FILE_DIR = CMakeFiles\t2.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target t2
+
+
+#############################################
+# Link the executable t2.exe
+
+build t2.exe: C_EXECUTABLE_LINKER__t2_Debug CMakeFiles/t2.dir/test2.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\t2.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = t2.exe
+  TARGET_IMPLIB = libt2.dll.a
+  TARGET_PDB = t2.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target t3
+
+
+#############################################
+# Order-only phony target for t3
+
+build cmake_object_order_depends_target_t3: phony || CMakeFiles/t3.dir
+
+build CMakeFiles/t3.dir/test3.c.obj: C_COMPILER__t3_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test3.c || cmake_object_order_depends_target_t3
+  DEP_FILE = CMakeFiles\t3.dir\test3.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\t3.dir
+  OBJECT_FILE_DIR = CMakeFiles\t3.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target t3
+
+
+#############################################
+# Link the executable t3.exe
+
+build t3.exe: C_EXECUTABLE_LINKER__t3_Debug CMakeFiles/t3.dir/test3.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\t3.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = t3.exe
+  TARGET_IMPLIB = libt3.dll.a
+  TARGET_PDB = t3.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target t4
+
+
+#############################################
+# Order-only phony target for t4
+
+build cmake_object_order_depends_target_t4: phony || CMakeFiles/t4.dir
+
+build CMakeFiles/t4.dir/test4.c.obj: C_COMPILER__t4_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test4.c || cmake_object_order_depends_target_t4
+  DEP_FILE = CMakeFiles\t4.dir\test4.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\t4.dir
+  OBJECT_FILE_DIR = CMakeFiles\t4.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target t4
+
+
+#############################################
+# Link the executable t4.exe
+
+build t4.exe: C_EXECUTABLE_LINKER__t4_Debug CMakeFiles/t4.dir/test4.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\t4.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = t4.exe
+  TARGET_IMPLIB = libt4.dll.a
+  TARGET_PDB = t4.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target t5
+
+
+#############################################
+# Order-only phony target for t5
+
+build cmake_object_order_depends_target_t5: phony || CMakeFiles/t5.dir
+
+build CMakeFiles/t5.dir/test5.c.obj: C_COMPILER__t5_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test5.c || cmake_object_order_depends_target_t5
+  DEP_FILE = CMakeFiles\t5.dir\test5.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\t5.dir
+  OBJECT_FILE_DIR = CMakeFiles\t5.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target t5
+
+
+#############################################
+# Link the executable t5.exe
+
+build t5.exe: C_EXECUTABLE_LINKER__t5_Debug CMakeFiles/t5.dir/test5.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\t5.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = t5.exe
+  TARGET_IMPLIB = libt5.dll.a
+  TARGET_PDB = t5.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -102,6 +267,16 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build p1: phony p1.exe
 
+build t1: phony t1.exe
+
+build t2: phony t2.exe
+
+build t3: phony t3.exe
+
+build t4: phony t4.exe
+
+build t5: phony t5.exe
+
 # =============================================================================
 # Folder targets.
 
@@ -110,7 +285,7 @@ build p1: phony p1.exe
 #############################################
 # Folder: C:/Users/cdog1/Documents/eece-4811/os-group/p1/build
 
-build all: phony p1.exe
+build all: phony p1.exe t1.exe t2.exe t3.exe t4.exe t5.exe
 
 # =============================================================================
 # Built-in targets

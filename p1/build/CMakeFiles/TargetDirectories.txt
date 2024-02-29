@@ -1,3 +1,8 @@
 C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/p1.dir
+C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/t1.dir
+C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/t2.dir
+C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/t3.dir
+C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/t4.dir
+C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/t5.dir
 C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/edit_cache.dir
 C:/Users/cdog1/Documents/eece-4811/os-group/p1/build/CMakeFiles/rebuild_cache.dir
