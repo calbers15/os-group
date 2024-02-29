@@ -55,36 +55,6 @@ build CMakeFiles/p1.dir/main.c.obj: C_COMPILER__p1_unscanned_Debug C$:/Users/cdo
   OBJECT_DIR = CMakeFiles\p1.dir
   OBJECT_FILE_DIR = CMakeFiles\p1.dir
 
-build CMakeFiles/p1.dir/test1.c.obj: C_COMPILER__p1_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test1.c || cmake_object_order_depends_target_p1
-  DEP_FILE = CMakeFiles\p1.dir\test1.c.obj.d
-  FLAGS = -g -Wall -Wextra
-  OBJECT_DIR = CMakeFiles\p1.dir
-  OBJECT_FILE_DIR = CMakeFiles\p1.dir
-
-build CMakeFiles/p1.dir/test2.c.obj: C_COMPILER__p1_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test2.c || cmake_object_order_depends_target_p1
-  DEP_FILE = CMakeFiles\p1.dir\test2.c.obj.d
-  FLAGS = -g -Wall -Wextra
-  OBJECT_DIR = CMakeFiles\p1.dir
-  OBJECT_FILE_DIR = CMakeFiles\p1.dir
-
-build CMakeFiles/p1.dir/test3.c.obj: C_COMPILER__p1_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test3.c || cmake_object_order_depends_target_p1
-  DEP_FILE = CMakeFiles\p1.dir\test3.c.obj.d
-  FLAGS = -g -Wall -Wextra
-  OBJECT_DIR = CMakeFiles\p1.dir
-  OBJECT_FILE_DIR = CMakeFiles\p1.dir
-
-build CMakeFiles/p1.dir/test4.c.obj: C_COMPILER__p1_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test4.c || cmake_object_order_depends_target_p1
-  DEP_FILE = CMakeFiles\p1.dir\test4.c.obj.d
-  FLAGS = -g -Wall -Wextra
-  OBJECT_DIR = CMakeFiles\p1.dir
-  OBJECT_FILE_DIR = CMakeFiles\p1.dir
-
-build CMakeFiles/p1.dir/test5.c.obj: C_COMPILER__p1_unscanned_Debug C$:/Users/cdog1/Documents/eece-4811/os-group/p1/test5.c || cmake_object_order_depends_target_p1
-  DEP_FILE = CMakeFiles\p1.dir\test5.c.obj.d
-  FLAGS = -g -Wall -Wextra
-  OBJECT_DIR = CMakeFiles\p1.dir
-  OBJECT_FILE_DIR = CMakeFiles\p1.dir
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target p1
@@ -93,7 +63,7 @@ build CMakeFiles/p1.dir/test5.c.obj: C_COMPILER__p1_unscanned_Debug C$:/Users/cd
 #############################################
 # Link the executable p1.exe
 
-build p1.exe: C_EXECUTABLE_LINKER__p1_Debug CMakeFiles/p1.dir/main.c.obj CMakeFiles/p1.dir/test1.c.obj CMakeFiles/p1.dir/test2.c.obj CMakeFiles/p1.dir/test3.c.obj CMakeFiles/p1.dir/test4.c.obj CMakeFiles/p1.dir/test5.c.obj
+build p1.exe: C_EXECUTABLE_LINKER__p1_Debug CMakeFiles/p1.dir/main.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\p1.dir
