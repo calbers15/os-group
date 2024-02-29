@@ -12,6 +12,7 @@ int main(int argc, char *argv[]){
 
     int arg;
     arg = atoi(argv[1]);
+    pid_t child_pids[arg];
 
     for (int i = 0; i < arg; i++){
         pid = fork();
@@ -25,18 +26,20 @@ int main(int argc, char *argv[]){
             printf("Child Process %d\n", i);
             printf("Child %d ID: %d\n", i, getpid());
             execlp("./t1", "t1", NULL);
-            printf("Child %d with ID %d finished successfully\n\n", i, getpid());
             exit(0);
         }
         else{
-            wait(NULL);
-            printf("Child %d with ID %d finished successfully\n\n", i, getpid());
+            child_pids[i] = pid;
         }
     }
 
 
     for (int i = 0; i < arg; i++){
-        wait(NULL);
+        int status;
+        pid_t finished_pid = waitpid(child_pids[i], &status, 0);
+        if(finished_pid != -1){
+            printf("Child %d with ID %d finished successfully\n\n", i, finished_pid);
+        }
     }
     return 0;
 }
