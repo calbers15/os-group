@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
             printf("Child %d ID: %d\n", i, getpid());
 
             char executable[10];
-            sprintf(executable,"./t%d", i+1);
+            sprintf(executable,"./t%d", (i % 5) + 1);
             execlp(executable, executable, NULL);
             exit(0);
         }
