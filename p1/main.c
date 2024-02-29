@@ -28,10 +28,14 @@ int main(int argc, char *argv[]){
             printf("Child %d with ID %d finished successfully\n\n", i, getpid());
             exit(0);
         }
+        else{
+            wait(NULL);
+            printf("Child %d with ID %d finished successfully\n\n", i, getpid());
+        }
     }
 
 
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < arg; i++){
         wait(NULL);
     }
     return 0;
