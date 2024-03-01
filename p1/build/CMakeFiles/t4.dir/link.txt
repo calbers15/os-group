@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/t4.dir/test4.c.o -o t4 

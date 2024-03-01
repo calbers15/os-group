@@ -1,4 +1,4 @@
-CMakeFiles/p1.dir/main.c.o: /home/calbers15/os-group/p1/main.c \
+CMakeFiles/p1.dir/main.c.o: /home/calbers15/eece-4811/os-group/p1/main.c \
  /usr/include/stdc-predef.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
