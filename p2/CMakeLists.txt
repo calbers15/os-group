@@ -10,4 +10,4 @@ add_executable(p2
 )
 
 
-target_compile_options(p1 PRIVATE -Wall -Wextra)
+target_compile_options(p2 PRIVATE -Wall -Wextra)
