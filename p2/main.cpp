@@ -6,6 +6,7 @@
 #include <queue>
 #include <cstdlib>
 #include <ctime>
+using namespace std;
 
 // Define the monitor class
 class Monitor {
