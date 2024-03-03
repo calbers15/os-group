@@ -74,8 +74,8 @@ int main(int argc, char *argv[]) {
 
     Monitor monitor(bufferSize);
 
-    vector<std::thread> producerThreads;
-    vector<std::thread> consumerThreads;
+    vector<thread> producerThreads;
+    vector<thread> consumerThreads;
 
     for (int i = 0; i < numProducers; ++i) {
         int numValues = bufferSize / numProducers + (i < bufferSize % numProducers ? 1 : 0);

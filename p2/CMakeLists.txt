@@ -6,8 +6,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(p2 
-    main.cpp
+    main.c
+    prod_cons_MT.c
+    prod_cons_MT.h
 )
 
 
-target_compile_options(p2 PRIVATE -Wall -Wextra)
+target_compile_options(p2 PRIVATE -Wall -Wextra -pthread -lpthread)
