@@ -47,10 +47,11 @@ void *consumer(void *arg) {
     int id = *((int *)arg);
     int num_values = 0;
     int total_values = *((int *)arg + 1);
+    int num_consumers = *((int *)arg + 2);
     int values_per_consumer = total_values / *((int *)arg + 2);
     int extra_values = total_values % *((int *)arg + 2);
     
-    if (id == *((int *)arg + 2) - 1)
+    if (id == num_consumers - 1)
         num_values = values_per_consumer + extra_values;
     else
         num_values = values_per_consumer;
