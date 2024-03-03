@@ -47,16 +47,16 @@ void *producer(void *arg) {
 
 void *consumer(void *arg) {
     int id = *((int *)arg);
-    int num_values = 0;
     int total_values = *((int *)arg + 1);
     int num_consumers = *((int *)arg + 2);
-    int values_per_consumer = total_values / *((int *)arg + 2);
-    int extra_values = total_values % *((int *)arg + 2);
     
-    if (id == num_consumers - 1)
-        num_values = values_per_consumer + extra_values;
-    else
-        num_values = values_per_consumer;
+    int values_per_consumer = total_values / num_consumers;
+    int extra_values = total_values % num_consumers;
+    
+    int num_values = values_per_consumer;
+    if (id < extra_values) {
+        num_values++; // Each consumer thread beyond the first 'extra_values' should consume one more value
+    }
     
     printf("C%d: Consuming %d values\n", id, num_values);
     
@@ -69,7 +69,7 @@ void *consumer(void *arg) {
         
         int value = monitor.buffer[monitor.out];
         printf("C%d: Reading %d from position %d\n", id, value, monitor.out);
-        monitor.out = (monitor.out + 1) % monitor.buffer_size;
+        monitor.out = (monitor.out + 1) % monitor.buffer_size; // Wrap around if necessary
         monitor.count--;
         
         pthread_cond_signal(&monitor.not_full);
