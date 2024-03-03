@@ -96,3 +96,4 @@ void *consumer(void *arg) {
     printf("C%d: Exiting\n", id);
     pthread_exit(NULL);
 }
+
