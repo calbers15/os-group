@@ -32,10 +32,10 @@ void *producer(void *arg) {
         
         monitor.buffer[monitor.in] = value;
         printf("P%d: Writing %d to position %d\n", id, value, monitor.in);
-        monitor.in = (monitor.in + 1) % monitor.buffer_size;
+        monitor.in = (monitor.in + 1) % monitor.buffer_size; // Wrap around if necessary
         monitor.count++;
         
-        pthread_cond_signal(&monitor.not_empty);
+        pthread_cond_signal(&monitor.not_empty); // Signal that buffer is not empty
         pthread_mutex_unlock(&monitor.mutex);
         
         usleep(rand() % 1000000); // Simulate some processing time
@@ -44,6 +44,7 @@ void *producer(void *arg) {
     printf("P%d: Exiting\n", id);
     pthread_exit(NULL);
 }
+
 
 void *consumer(void *arg) {
     int id = *((int *)arg);
@@ -72,7 +73,7 @@ void *consumer(void *arg) {
         monitor.out = (monitor.out + 1) % monitor.buffer_size; // Wrap around if necessary
         monitor.count--;
         
-        pthread_cond_signal(&monitor.not_full);
+        pthread_cond_signal(&monitor.not_full); // Signal that buffer is not full
         pthread_mutex_unlock(&monitor.mutex);
         
         usleep(rand() % 1000000); // Simulate some processing time
@@ -81,3 +82,4 @@ void *consumer(void *arg) {
     printf("C%d: Exiting\n", id);
     pthread_exit(NULL);
 }
+
