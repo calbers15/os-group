@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+typedef struct {
+    int id;
+    int total_values;
+    int num_consumers;
+} ConsumerArgs;
+
 int main(int argc, char *argv[]) {
     if (argc != 4) {
         printf("Usage: %s <buffer_size> <num_producers> <num_consumers>\n", argv[0]);
@@ -28,9 +34,10 @@ int main(int argc, char *argv[]) {
 
     printf("Main: started %d consumer threads\n", num_consumers);
     for (int i = 0; i < num_consumers; i++) {
-        int *args = malloc(2 * sizeof(int));
-        args[0] = i;
-        args[1] = num_producers * (rand() % 6 + 5); // Total number of values
+        ConsumerArgs *args = malloc(sizeof(ConsumerArgs));
+        args->id = i;
+        args->total_values = num_producers * (rand() % 6 + 5); // Total number of values
+        args->num_consumers = num_consumers;
         printf("Main: started consumer %d\n", i);
         pthread_create(&consumers[i], NULL, consumer, (void *)args);
     }
