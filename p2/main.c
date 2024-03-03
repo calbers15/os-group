@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     int num_producers = atoi(argv[2]);
     int num_consumers = atoi(argv[3]);
 
-    init_monitor();
+    init_monitor(buffer_size);
 
     pthread_t producers[num_producers];
     pthread_t consumers[num_consumers];
