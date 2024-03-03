@@ -50,6 +50,7 @@ void *producer(void *arg) {
     pthread_mutex_lock(&monitor.mutex);
     active_producers--;
     producers_exited = (active_producers == 0);
+    pthread_cond_broadcast(&monitor.not_empty); // Broadcast to wake up all consumers
     pthread_mutex_unlock(&monitor.mutex);
     
     pthread_exit(NULL);
@@ -96,4 +97,3 @@ void *consumer(void *arg) {
     printf("C%d: Exiting\n", id);
     pthread_exit(NULL);
 }
-
