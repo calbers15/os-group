@@ -3,11 +3,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-Monitor monitor;
+int active_producers = 0;
+int producers_exited = 0;
 
 void init_monitor(int buffer_size) {
     monitor.buffer_size = buffer_size;
-    monitor.buffer = malloc(buffer_size * sizeof(int));
+    monitor.buffer = malloc(buffer_size * sizeof(int)); // Allocate buffer based on buffer_size
     monitor.in = 0;
     monitor.out = 0;
     monitor.count = 0;
@@ -21,6 +22,8 @@ void *producer(void *arg) {
     int num_values = rand() % 6 + 5; // Generate 5 to 10 values
     printf("P%d: Producing %d values\n", id, num_values);
     
+    active_producers++;
+
     for (int i = 0; i < num_values; i++) {
         int value = rand() % 10 + 1; // Generate random value between 1 and 10
         
@@ -42,9 +45,14 @@ void *producer(void *arg) {
     }
     
     printf("P%d: Exiting\n", id);
+
+    pthread_mutex_lock(&monitor.mutex);
+    active_producers--;
+    producers_exited = (active_producers == 0);
+    pthread_mutex_unlock(&monitor.mutex);
+    
     pthread_exit(NULL);
 }
-
 
 void *consumer(void *arg) {
     int id = *((int *)arg);
@@ -61,11 +69,16 @@ void *consumer(void *arg) {
     
     printf("C%d: Consuming %d values\n", id, num_values);
     
-    for (int i = 0; i < num_values; i++) {
+    while (1) {
         pthread_mutex_lock(&monitor.mutex);
-        while (monitor.count <= 0) {
-            printf("C%d: Blocked due to empty buffer\n", id);
+        while (monitor.count <= 0 && !(producers_exited && monitor.count == 0)) {
+            printf("C%d: Blocked due to empty buffer or producers still active\n", id);
             pthread_cond_wait(&monitor.not_empty, &monitor.mutex);
+        }
+        
+        if (monitor.count <= 0 && producers_exited && monitor.count == 0) {
+            pthread_mutex_unlock(&monitor.mutex);
+            break; // Exit if producers have exited and buffer is empty
         }
         
         int value = monitor.buffer[monitor.out];
@@ -82,4 +95,3 @@ void *consumer(void *arg) {
     printf("C%d: Exiting\n", id);
     pthread_exit(NULL);
 }
-
