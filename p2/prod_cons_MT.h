@@ -4,7 +4,7 @@
 #include <pthread.h>
 
 
-typedef struct {
+struct Monitor {
     int *buffer;
     int in;
     int out;
@@ -13,9 +13,9 @@ typedef struct {
     pthread_mutex_t mutex;
     pthread_cond_t not_full;
     pthread_cond_t not_empty;
-} Monitor;
+};
 
-extern Monitor monitor;
+extern struct Monitor monitor;
 
 void init_monitor(int buffer_size);
 void *producer(void *arg);

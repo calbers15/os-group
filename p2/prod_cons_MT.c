@@ -5,6 +5,7 @@
 
 int active_producers = 0;
 int producers_exited = 0;
+struct Monitor monitor;
 
 void init_monitor(int buffer_size) {
     monitor.buffer_size = buffer_size;
