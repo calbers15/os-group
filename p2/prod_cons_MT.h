@@ -3,13 +3,13 @@
 
 #include <pthread.h>
 
-#define BUFFER_SIZE 100
 
 typedef struct {
-    int buffer[BUFFER_SIZE];
+    int *buffer;
     int in;
     int out;
     int count;
+    int buffer_size;
     pthread_mutex_t mutex;
     pthread_cond_t not_full;
     pthread_cond_t not_empty;
@@ -17,7 +17,7 @@ typedef struct {
 
 extern Monitor monitor;
 
-void init_monitor();
+void init_monitor(int buffer_size);
 void *producer(void *arg);
 void *consumer(void *arg);
 

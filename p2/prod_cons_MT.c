@@ -5,7 +5,9 @@
 
 Monitor monitor;
 
-void init_monitor() {
+void init_monitor(int buffer_size) {
+    monitor.buffer_size = buffer_size;
+    monitor.buffer = malloc(buffer_size * sizeof(int));
     monitor.in = 0;
     monitor.out = 0;
     monitor.count = 0;
@@ -23,14 +25,14 @@ void *producer(void *arg) {
         int value = rand() % 10 + 1; // Generate random value between 1 and 10
         
         pthread_mutex_lock(&monitor.mutex);
-        while (monitor.count >= BUFFER_SIZE) {
+        while (monitor.count >= monitor.buffer_size) {
             printf("P%d: Blocked due to full buffer\n", id);
             pthread_cond_wait(&monitor.not_full, &monitor.mutex);
         }
         
         monitor.buffer[monitor.in] = value;
         printf("P%d: Writing %d to position %d\n", id, value, monitor.in);
-        monitor.in = (monitor.in + 1) % BUFFER_SIZE;
+        monitor.in = (monitor.in + 1) % monitor.buffer_size;
         monitor.count++;
         
         pthread_cond_signal(&monitor.not_empty);
@@ -67,7 +69,7 @@ void *consumer(void *arg) {
         
         int value = monitor.buffer[monitor.out];
         printf("C%d: Reading %d from position %d\n", id, value, monitor.out);
-        monitor.out = (monitor.out + 1) % BUFFER_SIZE;
+        monitor.out = (monitor.out + 1) % monitor.buffer_size;
         monitor.count--;
         
         pthread_cond_signal(&monitor.not_full);
