@@ -17,8 +17,6 @@ typedef struct {
 
 
 void init_monitor(Monitor *m, int buffer_size);
-/*void put(Monitor *m, int data);
-int get(Monitor *m);*/
 void *producer(void *arg);
 void *consumer(void *arg);
 void destroy_monitor(Monitor *m);

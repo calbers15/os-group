@@ -16,33 +16,6 @@ void init_monitor(Monitor *m, int buffer_size){
     pthread_cond_init(&m->not_empty, NULL);
 }
 
-/*void put(Monitor *m, int data){
-    pthread_mutex_lock(&m->mutex);
-    while(m->count >= m->buffer_size){
-        pthread_cond_wait(&m->not_full, &m->mutex);
-    }
-
-    m->buffer[m->in] = data;
-    m->in = (m->in + 1) % m->buffer_size;
-    m->count++;
-    pthread_cond_signal(&m->not_empty);
-    pthread_mutex_unlock(&m->mutex);
-}
-
-int get(Monitor *m) {
-    int data;
-    pthread_mutex_lock(&m->mutex);
-    while (m->count <= 0) {
-        pthread_cond_wait(&m->not_empty, &m->mutex);
-    }
-    data = m->buffer[m->out];
-    m->out = (m->out + 1) % m->buffer_size;
-    m->count--;
-    pthread_cond_signal(&m->not_full);
-    pthread_mutex_unlock(&m->mutex);
-    return data;
-}*/
-
 void destroy_monitor(Monitor *m) {
     free(m->buffer);
     pthread_mutex_destroy(&m->mutex);
@@ -53,10 +26,10 @@ void destroy_monitor(Monitor *m) {
 
 void *consumer(void *arg) {
     Monitor *m = (Monitor *)arg;
+    static int consumer_id_counter = 0;
     int consumer_id;
     pthread_mutex_lock(&m->mutex);
-    consumer_id = m->count;
-    m->count++;
+    consumer_id = consumer_id_counter++;
     pthread_mutex_unlock(&m->mutex);
 
     int total_values = m->buffer_size / 2;  // Each consumer reads half of the total values
