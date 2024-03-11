@@ -41,14 +41,14 @@ int get(Monitor *m) {
     pthread_cond_signal(&m->not_full);
     pthread_mutex_unlock(&m->mutex);
     return data;
-}
+}*/
 
 void destroy_monitor(Monitor *m) {
     free(m->buffer);
     pthread_mutex_destroy(&m->mutex);
     pthread_cond_destroy(&m->not_full);
     pthread_cond_destroy(&m->not_empty);
-}*/
+}
 
 
 void *consumer(void *arg) {
@@ -120,5 +120,5 @@ void *producer(void *arg) {
     }
 
     printf("P%d thread finished.\n", producer_id);
-    return NULL;
+    return NULL;\
 }
