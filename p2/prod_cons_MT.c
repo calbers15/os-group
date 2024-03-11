@@ -35,9 +35,12 @@ void *consumer(void *arg) {
     int total_values = m->buffer_size / 2;  // Each consumer reads half of the total values
     int *num_consumers = (int *)arg;
     int values_to_read = total_values / *num_consumers;
-    if (consumer_id == *num_consumers - 1) {
-        // Last consumer reads any remaining values
-        values_to_read += total_values % *num_consumers;
+    
+    if((*num_consumers % 2) == 1){
+        if (consumer_id == *num_consumers - 1) {
+            // Last consumer in odd num consumer group reads any remaining values
+            values_to_read += total_values % *num_consumers;
+        }
     }
 
     printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, values_to_read);
