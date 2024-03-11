@@ -4,21 +4,23 @@
 #include <pthread.h>
 
 
-struct Monitor {
+typedef struct {
     int *buffer;
+    int buffer_size;
+    int count;
     int in;
     int out;
-    int count;
-    int buffer_size;
     pthread_mutex_t mutex;
     pthread_cond_t not_full;
     pthread_cond_t not_empty;
-};
+} Monitor;
 
-extern struct Monitor monitor;
 
-void init_monitor(int buffer_size);
+void init_monitor(Monitor *m, int buffer_size);
+/*void put(Monitor *m, int data);
+int get(Monitor *m);*/
 void *producer(void *arg);
 void *consumer(void *arg);
+void destroy_monitor(Monitor *m);
 
 #endif
