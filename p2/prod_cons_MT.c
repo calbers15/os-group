@@ -45,7 +45,7 @@ void *consumer(void *arg) {
     }*/
 
 
-    int *num_consumers = (int *)arg;
+    int *num_consumers = *((int *)arg);
     int values_to_read = max_values_write / *num_consumers;
     
 
