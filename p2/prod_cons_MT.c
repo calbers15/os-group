@@ -135,6 +135,8 @@ void *consumer(void *arg) {
         printf("Consumer C%d removed value %d from buffer at position %d.\n", consumer_id, value, m->out);
         m->out = (m->out + 1) % m->buffer_size;
         m->count--;
+
+        // Signal producer if buffer was full
         pthread_cond_signal(&m->not_full);
         pthread_mutex_unlock(&m->mutex);
     }
