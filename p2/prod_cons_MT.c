@@ -113,7 +113,8 @@ void *consumer(void *arg) {
     consumer_id = consumer_id_counter++;
     pthread_mutex_unlock(&m->mutex);
 
-    int max_values_read = m->buffer_size * 2 / *((int *)arg);
+    int num_consumers = *((int *)arg);
+    int max_values_read = (m->buffer_size * 2) / num_consumers;
     int values_read = 0;
 
     printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, max_values_read);
@@ -139,3 +140,4 @@ void *consumer(void *arg) {
 
     return NULL;
 }
+
