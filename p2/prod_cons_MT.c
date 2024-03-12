@@ -24,7 +24,7 @@ void destroy_monitor(Monitor *m) {
 }
 
 
-void *consumer(void *arg) {
+/*void *consumer(void *arg) {
     Monitor *m = (Monitor *)arg;
     int max_values_write = m->buffer_size * 2;
     static int consumer_id_counter = 0;
@@ -42,7 +42,7 @@ void *consumer(void *arg) {
             // Last consumer in odd num consumer group reads any remaining values
             values_to_read += total_values % *num_consumers;
         }
-    }*/
+    }
 
 
     int *num_consumers = *((int *)arg);
@@ -71,7 +71,7 @@ void *consumer(void *arg) {
     printf("Consumer C%d finished.\n", consumer_id);
 
     return NULL;
-}
+}*/
 
 void *producer(void *arg) {
     srand(time(0));
@@ -104,4 +104,38 @@ void *producer(void *arg) {
 
     printf("P%d thread finished.\n", producer_id);
     return NULL;\
+}
+void *consumer(void *arg) {
+    Monitor *m = (Monitor *)arg;
+    static int consumer_id_counter = 0;
+    int consumer_id;
+    pthread_mutex_lock(&m->mutex);
+    consumer_id = consumer_id_counter++;
+    pthread_mutex_unlock(&m->mutex);
+
+    int max_values_read = m->buffer_size * 2 / *((int *)arg);
+    int values_read = 0;
+
+    printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, max_values_read);
+
+    while (values_read < max_values_read) {
+        pthread_mutex_lock(&m->mutex);
+        while (m->count <= 0) {
+            printf("Consumer C%d waiting, buffer empty.\n", consumer_id);
+            pthread_cond_wait(&m->not_empty, &m->mutex);
+            printf("Consumer C%d woke up, consuming values.\n", consumer_id);
+        }
+
+        int value = m->buffer[m->out];
+        printf("Consumer C%d removed value %d from buffer at position %d.\n", consumer_id, value, m->out);
+        m->out = (m->out + 1) % m->buffer_size;
+        m->count--;
+        values_read++;
+        pthread_cond_signal(&m->not_full);
+        pthread_mutex_unlock(&m->mutex);
+    }
+
+    printf("Consumer C%d finished.\n", consumer_id);
+
+    return NULL;
 }
