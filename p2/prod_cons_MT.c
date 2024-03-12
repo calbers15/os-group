@@ -146,5 +146,3 @@ void *consumer(void *arg) {
 
     return NULL;
 }
-
-
