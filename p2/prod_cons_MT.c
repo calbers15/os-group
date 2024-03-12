@@ -114,13 +114,19 @@ void *consumer(void *arg) {
     pthread_mutex_unlock(&m->mutex);
 
     int num_consumers = *((int *)arg);
-    int max_values_read = (m->buffer_size * 2) / num_consumers;
-    int values_read = 0;
+    int total_values = m->buffer_size * 2;
+    int values_to_read = total_values / num_consumers;
+    if (consumer_id == num_consumers - 1) {
+        // Last consumer reads any remaining values
+        values_to_read += total_values % num_consumers;
+    }
 
-    printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, max_values_read);
+    printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, values_to_read);
 
-    while (values_read < max_values_read) {
+    for (int i = 0; i < values_to_read; i++) {
         pthread_mutex_lock(&m->mutex);
+        printf("Consumer C%d - Loop iteration %d\n", consumer_id, i);
+        printf("Consumer C%d - m->count: %d, m->in: %d, m->out: %d\n", consumer_id, m->count, m->in, m->out);
         while (m->count <= 0) {
             printf("Consumer C%d waiting, buffer empty.\n", consumer_id);
             pthread_cond_wait(&m->not_empty, &m->mutex);
@@ -131,7 +137,7 @@ void *consumer(void *arg) {
         printf("Consumer C%d removed value %d from buffer at position %d.\n", consumer_id, value, m->out);
         m->out = (m->out + 1) % m->buffer_size;
         m->count--;
-        values_read++;
+        printf("Consumer C%d - After consumption: m->count: %d, m->in: %d, m->out: %d\n", consumer_id, m->count, m->in, m->out);
         pthread_cond_signal(&m->not_full);
         pthread_mutex_unlock(&m->mutex);
     }
@@ -140,4 +146,5 @@ void *consumer(void *arg) {
 
     return NULL;
 }
+
 
