@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
 
     for(int i = 0; i < numConsumers; i++){
         printf("Creating consumer thread C%d\n", i);
-        pthread_create(&consumer_threads[i], NULL, consumer, (void *)&m);
+        pthread_create(&consumer_threads[i], NULL, consumer, (void *)&numConsumers);
     }
 
     for (int i = 0; i < numProducers; i++){
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
     }
 
     destroy_monitor(&m);
-    
+
     printf("Program Complete\n");
 
 

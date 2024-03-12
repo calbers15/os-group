@@ -26,13 +26,14 @@ void destroy_monitor(Monitor *m) {
 
 void *consumer(void *arg) {
     Monitor *m = (Monitor *)arg;
+    int max_values_write = m->buffer_size * 2;
     static int consumer_id_counter = 0;
     int consumer_id;
     pthread_mutex_lock(&m->mutex);
     consumer_id = consumer_id_counter++;
     pthread_mutex_unlock(&m->mutex);
 
-    int total_values = m->buffer_size / 2;  // Each consumer reads half of the total values
+    /*int total_values = m->buffer_size / 2;  // Each consumer reads half of the total values
     int *num_consumers = (int *)arg;
     int values_to_read = total_values / *num_consumers;
     
@@ -41,7 +42,13 @@ void *consumer(void *arg) {
             // Last consumer in odd num consumer group reads any remaining values
             values_to_read += total_values % *num_consumers;
         }
-    }
+    }*/
+
+
+    int *num_consumers = (int *)arg;
+    int values_to_read = max_values_write / *num_consumers;
+    
+
 
     printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, values_to_read);
 
