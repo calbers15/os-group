@@ -11,6 +11,7 @@ void init_monitor(Monitor *m, int buffer_size){
     m->count = 0;
     m->in = 0;
     m->out = 0;
+    m->num_consumers = 0;
     pthread_mutex_init(&m->mutex, NULL);
     pthread_cond_init(&m->not_full, NULL);
     pthread_cond_init(&m->not_empty, NULL);
@@ -85,7 +86,6 @@ void *producer(void *arg) {
     pthread_mutex_unlock(&m->mutex);
 
     printf("Producer P%d entered. Producing %d values.\n", producer_id, max_values_write);
-    printf("m->in = %d\n", m->in);
     for (int i = 0; i < max_values_write; i++) {
         pthread_mutex_lock(&m->mutex);
         while(m->count >= m->buffer_size){
@@ -97,7 +97,6 @@ void *producer(void *arg) {
         int data = rand() % 11;
         m->buffer[m->in] = data;
         printf("P%d added value %d into buffer at position %d.\n", producer_id, data, m->in);
-        printf("m->in = %d", m->in);
         m->in = (m->in + 1) % m->buffer_size;
         m->count++;
         pthread_cond_signal(&m->not_empty);
@@ -115,7 +114,7 @@ void *consumer(void *arg) {
     consumer_id = consumer_id_counter++;
     pthread_mutex_unlock(&m->mutex);
 
-    int num_consumers = *((int *)arg);
+    int num_consumers = ((Monitor *)arg)->num_consumers;
     int total_values = m->buffer_size * 2;
     int values_to_read = total_values / num_consumers;
     if (consumer_id == num_consumers - 1) {

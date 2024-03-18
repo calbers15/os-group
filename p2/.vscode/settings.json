@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "prod_cons_mt.h": "c"
+        "prod_cons_mt.h": "c",
+        "stdio.h": "c"
     }
 }

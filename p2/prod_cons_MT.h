@@ -10,6 +10,7 @@ typedef struct {
     int count;
     int in;
     int out;
+    int num_consumers;
     pthread_mutex_t mutex;
     pthread_cond_t not_full;
     pthread_cond_t not_empty;
