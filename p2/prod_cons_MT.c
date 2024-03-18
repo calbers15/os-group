@@ -85,6 +85,7 @@ void *producer(void *arg) {
     pthread_mutex_unlock(&m->mutex);
 
     printf("Producer P%d entered. Producing %d values.\n", producer_id, max_values_write);
+    printf("m->in = %d\n", m->in);
     for (int i = 0; i < max_values_write; i++) {
         pthread_mutex_lock(&m->mutex);
         while(m->count >= m->buffer_size){
@@ -103,7 +104,6 @@ void *producer(void *arg) {
     }
 
     printf("P%d thread finished.\n", producer_id);
-    printf("%d", m->out);
     return NULL;\
 }
 void *consumer(void *arg) {
