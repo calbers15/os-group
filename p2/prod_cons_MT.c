@@ -128,7 +128,9 @@ void *consumer(void *arg) {
         pthread_mutex_lock(&m->mutex);
         while (m->count <= 0) {
             printf("Consumer C%d waiting, buffer empty.\n", consumer_id);
+            pthread_mutex_unlock(&m->mutex);
             pthread_cond_wait(&m->not_empty, &m->mutex);
+            pthread_mutex_lock(&m->mutex);
             printf("Consumer C%d woke up, buffer not empty.\n", consumer_id);
         }
         
