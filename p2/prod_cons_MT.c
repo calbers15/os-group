@@ -121,7 +121,7 @@ void *consumer(void *arg) {
         // Last consumer reads any remaining values
         values_to_read += total_values % num_consumers;
     }
-
+    printf("values_to_read = %d", values_to_read);
     printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, values_to_read);
 
     for (int i = 0; i < values_to_read; i++) {
