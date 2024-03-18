@@ -103,6 +103,7 @@ void *producer(void *arg) {
     }
 
     printf("P%d thread finished.\n", producer_id);
+    printf("%d", m->out);
     return NULL;\
 }
 void *consumer(void *arg) {
