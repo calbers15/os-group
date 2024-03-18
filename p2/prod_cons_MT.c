@@ -114,7 +114,7 @@ void *consumer(void *arg) {
     consumer_id = consumer_id_counter++;
     pthread_mutex_unlock(&m->mutex);
 
-    int num_consumers = ((Monitor *)arg)->num_consumers;
+    int num_consumers = m->num_consumers;
     int total_values = m->buffer_size * 2;
     int values_to_read = total_values / num_consumers;
     if (consumer_id == num_consumers - 1) {
@@ -131,7 +131,7 @@ void *consumer(void *arg) {
             pthread_cond_wait(&m->not_empty, &m->mutex);
             printf("Consumer C%d woke up, buffer not empty.\n", consumer_id);
         }
-
+        
         int value = m->buffer[m->out];
         printf("Consumer C%d removed value %d from buffer at position %d.\n", consumer_id, value, m->out);
         m->out = (m->out + 1) % m->buffer_size;
