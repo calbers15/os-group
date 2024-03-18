@@ -97,6 +97,7 @@ void *producer(void *arg) {
         int data = rand() % 11;
         m->buffer[m->in] = data;
         printf("P%d added value %d into buffer at position %d.\n", producer_id, data, m->in);
+        printf("m->in = %d", m->in);
         m->in = (m->in + 1) % m->buffer_size;
         m->count++;
         pthread_cond_signal(&m->not_empty);
