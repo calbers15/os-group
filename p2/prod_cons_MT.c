@@ -114,7 +114,7 @@ void *consumer(void *arg) {
     consumer_id = consumer_id_counter++;
     pthread_mutex_unlock(&m->mutex);
 
-    int num_consumers = m->num_consumers;
+    int num_consumers = *((int *)arg);
     int total_values = m->buffer_size * 2;
     int values_to_read = total_values / num_consumers;
     if (consumer_id == num_consumers - 1) {
