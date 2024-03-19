@@ -117,11 +117,11 @@ void *consumer(void *arg) {
     int num_consumers = *((int *)arg);
     int total_values = m->buffer_size * 2;
     int values_to_read = total_values / num_consumers;
+    printf("%d / %d = %d\n", total_values, num_consumers, values_to_read);
     if (consumer_id == num_consumers - 1) {
         // Last consumer reads any remaining values
         values_to_read += total_values % num_consumers;
     }
-    printf("values_to_read = %d", values_to_read);
     printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, values_to_read);
 
     for (int i = 0; i < values_to_read; i++) {
