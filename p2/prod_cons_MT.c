@@ -55,7 +55,7 @@ void *producer(void *arg) {
     }
 
     printf("P%d thread finished.\n", producer_id);
-    return NULL;\
+    return NULL;
 }
 void *consumer(void *arg) {
     Monitor *m = (Monitor *)arg;
@@ -68,20 +68,19 @@ void *consumer(void *arg) {
     int num_consumers = m->num_consumers;
     int total_values = m->buffer_size * 2;
     int values_to_read = total_values / num_consumers;
-    printf("%d / %d = %d\n", total_values, num_consumers, values_to_read);
     if (consumer_id == num_consumers - 1) {
         // Last consumer reads any remaining values
         values_to_read += total_values % num_consumers;
     }
+
+    printf("%d / %d = %d\n", total_values, num_consumers, values_to_read);
     printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, values_to_read);
 
     for (int i = 0; i < values_to_read; i++) {
         pthread_mutex_lock(&m->mutex);
         while (m->count <= 0) {
             printf("Consumer C%d waiting, buffer empty.\n", consumer_id);
-            pthread_mutex_unlock(&m->mutex);
             pthread_cond_wait(&m->not_empty, &m->mutex);
-            pthread_mutex_lock(&m->mutex);
             printf("Consumer C%d woke up, buffer not empty.\n", consumer_id);
         }
         
