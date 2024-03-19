@@ -18,9 +18,8 @@ int main(int argc, char *argv[]){
     pthread_t producer_threads[numProducers];
     pthread_t consumer_threads[numConsumers];
 
-    Monitor *m;
-    init_monitor(&m, bufferSize);
-    m->num_consumers = numConsumers;
+    Monitor m;
+    init_monitor(&m, bufferSize, numProducers, numConsumers);
 
     srand(time(0));
 

@@ -5,13 +5,14 @@
 #include <time.h>
 
 
-void init_monitor(Monitor *m, int buffer_size){
+void init_monitor(Monitor *m, int buffer_size, int numProducers, int numConsumers){
     m->buffer = (int *)malloc(buffer_size * sizeof(int));
     m->buffer_size = buffer_size;
     m->count = 0;
     m->in = 0;
     m->out = 0;
-    m->num_consumers = 0;
+    m->num_consumers = numConsumers;
+    m->num_producers = numProducers;
     pthread_mutex_init(&m->mutex, NULL);
     pthread_cond_init(&m->not_full, NULL);
     pthread_cond_init(&m->not_empty, NULL);

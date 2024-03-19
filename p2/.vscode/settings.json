@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "prod_cons_mt.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "time.h": "c"
     }
 }
