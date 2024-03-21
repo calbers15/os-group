@@ -28,6 +28,7 @@ void destroy_monitor(Monitor *m) {
 void *producer(void *arg) {
     srand(time(0));
     Monitor *m = (Monitor *)arg;
+    int num_producers = m->num_producers;
     int max_values_write = m->buffer_size * 2;
 
     static int producer_id_counter = 0;
@@ -66,7 +67,7 @@ void *consumer(void *arg) {
     pthread_mutex_unlock(&m->mutex);
 
     int num_consumers = m->num_consumers;
-    int total_values = m->buffer_size * 2;
+    int total_values = (m->buffer_size * 2) * m->num_producers;
     int values_to_read = total_values / num_consumers;
     if (consumer_id == num_consumers - 1) {
         // Last consumer reads any remaining values
