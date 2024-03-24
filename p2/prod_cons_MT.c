@@ -4,9 +4,10 @@
 #include <pthread.h>
 #include <time.h>
 
-
+//init monitor member function utilizes structure member variables defined in header file to set up the monitor for use, based on user input.
+//also intitializes the pthread functions and condition variables that will be utilized
 void init_monitor(Monitor *m, int buffer_size, int numProducers, int numConsumers){
-    m->buffer = (int *)malloc(buffer_size * sizeof(int));
+    m->buffer = (int *)malloc(buffer_size * sizeof(int));       //dynamically allocate memory for n=buffer_size of integer sized data members
     m->buffer_size = buffer_size;
     m->count = 0;
     m->in = 0;
@@ -18,6 +19,7 @@ void init_monitor(Monitor *m, int buffer_size, int numProducers, int numConsumer
     pthread_cond_init(&m->not_empty, NULL);
 }
 
+//destructor, releases all condition variables and mutex locks, as well as erases entire buffer
 void destroy_monitor(Monitor *m) {
     free(m->buffer);
     pthread_mutex_destroy(&m->mutex);
@@ -25,31 +27,34 @@ void destroy_monitor(Monitor *m) {
     pthread_cond_destroy(&m->not_empty);
 }
 
+//producer function, in charge of calculating values to be entered,
+//when to lock the buffer (during critical sections ie adding values),
+//when to signal consumer threads that buffer is ready to be read,
+//when to not write to buffer due to it being full
 void *producer(void *arg) {
-    srand(time(0));
-    Monitor *m = (Monitor *)arg;
-    int num_producers = m->num_producers;
-    int max_values_write = m->buffer_size * 2;
+    srand(time(0));         //set up the time varaible for random number generation
+    Monitor *m = (Monitor *)arg;    //declare *m as the argument passed into the function from main
+    int max_values_write = m->buffer_size * 2;  //sets the maximum values that each producer will produce as double the buffer size (from program spec)
 
-    static int producer_id_counter = 0;
-    int producer_id;
-    pthread_mutex_lock(&m->mutex);
+    static int producer_id_counter = 0; //producer_id _counter is static so that each thread has a unique id
+    int producer_id;    //unique producer id for each producer thread
+    pthread_mutex_lock(&m->mutex);  //lock the producer_id_counter to ensure that only one thread at a time increments it, giving a unique id for each thread
     producer_id = producer_id_counter++;
     pthread_mutex_unlock(&m->mutex);
 
     printf("Producer P%d entered. Producing %d values.\n", producer_id, max_values_write);
     for (int i = 0; i < max_values_write; i++) {
-        pthread_mutex_lock(&m->mutex);
-        while(m->count >= m->buffer_size){
+        pthread_mutex_lock(&m->mutex);      //lock this section of code while producer is writing value to buffer
+        while(m->count >= m->buffer_size){      //if the amount of data in buffer has reached (or exceeded) buffer size, print message and wait until not full
             printf("P%d blocked due to full buffer.\n", producer_id);
             pthread_cond_wait(&m->not_full, &m->mutex);
             printf("P%d woke up, producing values.\n", producer_id);
         }
 
-        int data = rand() % 11;
-        m->buffer[m->in] = data;
+        int data = rand() % 11;     //randomizes data added to buffer from 1 to 10
+        m->buffer[m->in] = data;    //input data into buffer at position [m->in]
         printf("P%d added value %d into buffer at position %d.\n", producer_id, data, m->in);
-        m->in = (m->in + 1) % m->buffer_size;
+        m->in = (m->in + 1) % m->buffer_size;   //increment 
         m->count++;
         pthread_cond_signal(&m->not_empty);
         pthread_mutex_unlock(&m->mutex);
@@ -74,7 +79,7 @@ void *consumer(void *arg) {
         values_to_read += total_values % num_consumers;
     }
 
-    printf("%d / %d = %d\n", total_values, num_consumers, values_to_read);
+    //printf("%d / %d = %d\n", total_values, num_consumers, values_to_read); used to debug total_values issue
     printf("Consumer C%d entered. Consuming %d values.\n", consumer_id, values_to_read);
 
     for (int i = 0; i < values_to_read; i++) {
