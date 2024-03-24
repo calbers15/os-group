@@ -6,7 +6,7 @@
 
 ### About:
 
-This README is written for Project 2. The purpose of Project 1 is to introduce students
+This README is written for Project 2. The purpose of Project 2 is to introduce students
 to multithreaded programming with producers and consumers.
 
 ### How the Program Operates
