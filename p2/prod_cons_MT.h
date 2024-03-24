@@ -1,3 +1,8 @@
+//Cameron Albers & Austin Silva
+//EECE.4811 - Operating Systems
+//Michael J. Geiger, Yongshun Xu
+//Project 2 - Multithreading
+
 #ifndef PROD_CONS_MT_H
 #define PROD_CONS_MT_H
 
