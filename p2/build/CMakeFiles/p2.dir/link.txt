@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/p2.dir/main.cpp.o -o p2 
+/usr/bin/cc CMakeFiles/p2.dir/main.c.o CMakeFiles/p2.dir/prod_cons_MT.c.o -o p2 
