@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/calbers15/os-group/p2
+CMAKE_SOURCE_DIR = /home/calbers15/eece-4811/os-group/p2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/calbers15/os-group/p2/build
+CMAKE_BINARY_DIR = /home/calbers15/eece-4811/os-group/p2/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/p2.dir/depend.make
@@ -69,31 +69,47 @@ include CMakeFiles/p2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/p2.dir/flags.make
 
-CMakeFiles/p2.dir/main.cpp.o: CMakeFiles/p2.dir/flags.make
-CMakeFiles/p2.dir/main.cpp.o: ../main.cpp
-CMakeFiles/p2.dir/main.cpp.o: CMakeFiles/p2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/calbers15/os-group/p2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/p2.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/p2.dir/main.cpp.o -MF CMakeFiles/p2.dir/main.cpp.o.d -o CMakeFiles/p2.dir/main.cpp.o -c /home/calbers15/os-group/p2/main.cpp
+CMakeFiles/p2.dir/main.c.o: CMakeFiles/p2.dir/flags.make
+CMakeFiles/p2.dir/main.c.o: ../main.c
+CMakeFiles/p2.dir/main.c.o: CMakeFiles/p2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/calbers15/eece-4811/os-group/p2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/p2.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/p2.dir/main.c.o -MF CMakeFiles/p2.dir/main.c.o.d -o CMakeFiles/p2.dir/main.c.o -c /home/calbers15/eece-4811/os-group/p2/main.c
 
-CMakeFiles/p2.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p2.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/calbers15/os-group/p2/main.cpp > CMakeFiles/p2.dir/main.cpp.i
+CMakeFiles/p2.dir/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/p2.dir/main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/calbers15/eece-4811/os-group/p2/main.c > CMakeFiles/p2.dir/main.c.i
 
-CMakeFiles/p2.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p2.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/calbers15/os-group/p2/main.cpp -o CMakeFiles/p2.dir/main.cpp.s
+CMakeFiles/p2.dir/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/p2.dir/main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/calbers15/eece-4811/os-group/p2/main.c -o CMakeFiles/p2.dir/main.c.s
+
+CMakeFiles/p2.dir/prod_cons_MT.c.o: CMakeFiles/p2.dir/flags.make
+CMakeFiles/p2.dir/prod_cons_MT.c.o: ../prod_cons_MT.c
+CMakeFiles/p2.dir/prod_cons_MT.c.o: CMakeFiles/p2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/calbers15/eece-4811/os-group/p2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/p2.dir/prod_cons_MT.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/p2.dir/prod_cons_MT.c.o -MF CMakeFiles/p2.dir/prod_cons_MT.c.o.d -o CMakeFiles/p2.dir/prod_cons_MT.c.o -c /home/calbers15/eece-4811/os-group/p2/prod_cons_MT.c
+
+CMakeFiles/p2.dir/prod_cons_MT.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/p2.dir/prod_cons_MT.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/calbers15/eece-4811/os-group/p2/prod_cons_MT.c > CMakeFiles/p2.dir/prod_cons_MT.c.i
+
+CMakeFiles/p2.dir/prod_cons_MT.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/p2.dir/prod_cons_MT.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/calbers15/eece-4811/os-group/p2/prod_cons_MT.c -o CMakeFiles/p2.dir/prod_cons_MT.c.s
 
 # Object files for target p2
 p2_OBJECTS = \
-"CMakeFiles/p2.dir/main.cpp.o"
+"CMakeFiles/p2.dir/main.c.o" \
+"CMakeFiles/p2.dir/prod_cons_MT.c.o"
 
 # External object files for target p2
 p2_EXTERNAL_OBJECTS =
 
-p2: CMakeFiles/p2.dir/main.cpp.o
+p2: CMakeFiles/p2.dir/main.c.o
+p2: CMakeFiles/p2.dir/prod_cons_MT.c.o
 p2: CMakeFiles/p2.dir/build.make
 p2: CMakeFiles/p2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/calbers15/os-group/p2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable p2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/calbers15/eece-4811/os-group/p2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable p2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/p2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -105,6 +121,6 @@ CMakeFiles/p2.dir/clean:
 .PHONY : CMakeFiles/p2.dir/clean
 
 CMakeFiles/p2.dir/depend:
-	cd /home/calbers15/os-group/p2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/calbers15/os-group/p2 /home/calbers15/os-group/p2 /home/calbers15/os-group/p2/build /home/calbers15/os-group/p2/build /home/calbers15/os-group/p2/build/CMakeFiles/p2.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/calbers15/eece-4811/os-group/p2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/calbers15/eece-4811/os-group/p2 /home/calbers15/eece-4811/os-group/p2 /home/calbers15/eece-4811/os-group/p2/build /home/calbers15/eece-4811/os-group/p2/build /home/calbers15/eece-4811/os-group/p2/build/CMakeFiles/p2.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/p2.dir/depend
 

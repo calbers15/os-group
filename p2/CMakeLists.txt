@@ -1,3 +1,8 @@
+##Cameron Albers & Austin Silva
+##EECE.4811 - Operating Systems
+##Michael J. Geiger, Yongshun Xu
+##Project 2 - Multithreading
+
 cmake_minimum_required(VERSION 3.10)
 
 project(p2)
