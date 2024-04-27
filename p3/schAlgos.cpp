@@ -316,7 +316,7 @@ algorithmMetrics sjf(vector<Process> processes, string s1, int numProcess, int i
 		        processes[currentProc].burstTime--;
                 currentTime++;
 
-                // Print scheduler state if the current time is a multiple of the interval
+                // Print scheduler metrice if the current time is a multiple of the interval
                 if (currentTime % interv == 0 || currentTime % interv == interv){
 
                     printSJF(processes, s1, currentTime, currentProc);
@@ -338,7 +338,7 @@ algorithmMetrics sjf(vector<Process> processes, string s1, int numProcess, int i
             // If no process was found, increment the current time
             currentTime++;
 
-            // Print scheduler state if the current time is a multiple of the interval
+            // Print scheduler metrice if the current time is a multiple of the interval
             if (currentTime % interv == 0 ){
 
                 printSJF(processes, s1, currentTime, currentProc);
@@ -389,4 +389,232 @@ algorithmMetrics sjf(vector<Process> processes, string s1, int numProcess, int i
     out << "Context Switches: " << contextSw << endl;
     out.close(); // Close the output file
     return metric;
+}
+
+algorithmMetrics roundRobin(vector<Process> processes, string s1, int numProcess, int interv, int quantum){
+
+    int tempId;
+    ofstream out;
+    out.open(s1, ios_base::app);
+    algorithmMetrics metric;
+    int currentTime = 0;
+    bool isProcessRunning = false;
+    Process currentRunningProccess;
+    int qCounter = 0;
+    float numProcessFloat = numProcess;
+    int numFinishedProcesses = 0;
+    int contextSw = 0;
+    string procSeq = "";
+    queue<Process> readyQueue;
+
+    out << endl;
+    out << "*** RoundRobin Scheduling ***" << endl;
+
+    while (numFinishedProcesses < numProcess) {
+
+        
+        if (currentTime % interv == 0 || currentTime % interv == interv){
+            out << endl;
+            out << "t = " << currentTime << endl;
+        }
+        for (int i = 0; i < numProcess; i++) {
+
+            if (processes[i].arrivalTime <= currentTime && processes[i].hasRun == 0) {
+
+                readyQueue.push(processes[i]);
+                processes[i].hasRun = 1;
+
+            }
+        
+        }
+
+        if (isProcessRunning == false) {
+            if (currentTime % interv == 0 || currentTime % interv == interv){
+                out << "CPU: Loading process " << readyQueue.front().pid << " (CPU burst = " << readyQueue.front().burstTime << ")" << endl;
+            }
+            currentRunningProccess = readyQueue.front();
+            if (processes[currentRunningProccess.pid].startTime == -1) { // If the process hasn't started yet
+
+                processes[currentRunningProccess.pid].startTime = currentTime; // Set the start time
+
+            }
+            tempId = currentRunningProccess.pid;
+            procSeq += to_string(tempId) + "-";
+            contextSw++;
+            if (currentTime % interv == 0 || currentTime % interv == interv){
+                out << "Ready Queue: ";
+                //Cycling through the queue to print out the ready queue
+                queue<Process> tempQueue = readyQueue; // Create a temporary queue
+                while (!tempQueue.empty()) { // Loop through the temporary queue until it's empty
+                    out << tempQueue.front().pid;
+                    tempQueue.pop();
+                    if (!tempQueue.empty()) { // Only print the dash if there is another process after the current one
+                        out << "-";
+                    }
+                }
+                out << endl;
+            }
+            readyQueue.pop();
+            isProcessRunning = true;
+            
+            currentRunningProccess.burstTime--;
+        }
+        
+        else if (currentRunningProccess.burstTime == 0) {
+            if (currentTime % interv == 0 || currentTime % interv == interv){
+                out << "CPU: Finishing process " << currentRunningProccess.pid << "; loading process " << readyQueue.front().pid << " (CPU burst = " << readyQueue.front().burstTime << ")" << endl;
+                out << "Ready Queue: ";
+                queue<Process> tempQueue = readyQueue; // Create a temporary queue
+                while (!tempQueue.empty()) { // Loop through the temporary queue until it's empty
+                    out << tempQueue.front().pid;
+                    tempQueue.pop();
+                    if (!tempQueue.empty()) { // Only print the dash if there is another process after the current one
+                        out << "-";
+                    }
+                }
+                out << endl;
+            }
+            processes[currentRunningProccess.pid].turnaroundTime = currentTime - processes[currentRunningProccess.pid].arrivalTime;
+            processes[currentRunningProccess.pid].waitTime = processes[currentRunningProccess.pid].turnaroundTime - processes[currentRunningProccess.pid].burstTime;
+                
+            if (!readyQueue.empty()) {
+                
+                currentRunningProccess = readyQueue.front();
+                if (processes[currentRunningProccess.pid].startTime == -1) { // If the process hasn't started yet
+
+                processes[currentRunningProccess.pid].startTime = currentTime; // Set the start time
+
+                }
+                readyQueue.pop();
+                tempId = currentRunningProccess.pid;
+                procSeq += to_string(tempId) + "-";
+                contextSw++;
+            }
+            else {
+                if (currentTime % interv == 0 || currentTime % interv == interv){
+                    out << "empty";
+                    out << endl;
+                }
+            }
+            
+            currentRunningProccess.burstTime--;
+            numFinishedProcesses++;
+            qCounter = 0;
+        }
+
+        else if (qCounter == quantum && !readyQueue.empty()) {
+            if (currentTime % interv == 0 || currentTime % interv == interv){
+                out << "CPU: Preempting process " << currentRunningProccess.pid << " (remaining CPU burst = " << currentRunningProccess.burstTime << ")" << "; loading process " << readyQueue.front().pid << " (CPU burst = " << readyQueue.front().burstTime << ")" << endl;
+            
+            
+            
+                out << "Ready Queue: ";
+                queue<Process> tempQueue = readyQueue; // Create a temporary queue
+                while (!tempQueue.empty()) { // Loop through the temporary queue until it's empty
+                    out << tempQueue.front().pid;
+                    tempQueue.pop();
+                    if (!tempQueue.empty()) { // Only print the dash if there is another process after the current one
+                        out << "-";
+                    }
+                }
+                out << endl;
+            }
+            readyQueue.push(currentRunningProccess);
+            currentRunningProccess = readyQueue.front();
+            if (processes[currentRunningProccess.pid].startTime == -1) { // If the process hasn't started yet
+
+                processes[currentRunningProccess.pid].startTime = currentTime; // Set the start time
+
+            }
+            tempId = currentRunningProccess.pid;
+            procSeq += to_string(tempId) + "-";
+            contextSw++;
+            readyQueue.pop();
+            currentRunningProccess.burstTime--;
+            qCounter = 0;
+
+        }
+
+        else if (currentRunningProccess.burstTime != 0) {
+            if (currentTime % interv == 0 || currentTime % interv == interv){
+                out << "CPU: Running process " << currentRunningProccess.pid << " (remaining CPU burst = " << currentRunningProccess.burstTime << ")" << endl;
+                out << "Ready Queue: ";
+                queue<Process> tempQueue = readyQueue; // Create a temporary queue
+                while (!tempQueue.empty()) { // Loop through the temporary queue until it's empty
+                    out << tempQueue.front().pid;
+                    tempQueue.pop();
+                    if (!tempQueue.empty()) { // Only print the dash if there is another process after the current one
+                        out << "-";
+                    }
+                }
+                out << endl;
+            }
+                if (readyQueue.empty()) {
+                    if (qCounter == quantum) {
+                        qCounter = qCounter - 1;
+                    }
+                    if (currentTime % interv == 0 || currentTime % interv == interv){
+                        out << "empty";
+                    }
+                }
+                
+            
+            currentRunningProccess.burstTime--;
+        }
+
+        qCounter++;
+        currentTime++;
+        
+
+            
+    }
+    procSeq.pop_back(); // Remove the last hyphen    
+    
+    out << endl;
+    out << "*********************************************************" << endl;
+    out << "Round robin Summary (WT = wait time, TT = turnaround time):" << endl;
+    out << "PID     WT     TT" << endl;
+
+    for(int i = 0; i < numProcess; i++){
+
+        if(processes[i].waitTime < 10){
+
+            out << " " << processes[i].pid << "      " << processes[i].waitTime << "      " << processes[i].turnaroundTime << endl;
+        
+        }
+
+        if(processes[i].waitTime >= 10 && processes[i].waitTime < 100){
+
+            out << " " << processes[i].pid << "      " << processes[i].waitTime << "     " << processes[i].turnaroundTime << endl;
+        
+        }
+        if (processes[i].waitTime >= 100){
+
+            out << " " << processes[i].pid << "     " << processes[i].waitTime << "     " << processes[i].turnaroundTime << endl;
+        
+        }
+
+    }
+
+    for(int x = 0; x < numProcess; x++){
+
+        metric.avWait = metric.avWait + processes[x].waitTime;
+        metric.avTurnaround = metric.avTurnaround + processes[x].turnaroundTime;
+
+    }
+    metric.avWait = metric.avWait / numProcessFloat;
+    metric.avTurnaround = metric.avTurnaround / numProcessFloat;
+
+    out << "AVG" << "     " << metric.avWait << "   " << metric.avTurnaround << endl;
+
+    
+    metric.contextSwitches = contextSw;
+    out << "Process sequence: " << procSeq << endl;
+    out << "Context switches: " << contextSw << endl;
+
+    out << endl;
+    out << endl;
+    out.close(); // Close the output file
+
+    return metric; // Return the average metricistics object
 }

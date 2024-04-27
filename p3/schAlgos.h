@@ -57,7 +57,7 @@ algorithmMetrics sjf(vector<Process> processes, string s1, int numProcess, int i
 algorithmMetrics stcf(vector<Process> processes, string s1, int numProcess, int interv);
 
 //round robin function
-algorithmMetrics rr(vector<Process> processes, string s1, int numProcess, int interv);
+algorithmMetrics roundRobin(vector<Process> processes, string s1, int numProcess, int interv, int quantum);
 
 //first come first serve function
 algorithmMetrics fcfs(vector<Process> processes, string s1, int numProcess, int interv);
