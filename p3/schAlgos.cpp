@@ -222,3 +222,74 @@ void printNPP(vector<Process> proc, string s2, int currentTime, int currentProce
     out.close(); // Close the output file
 
 }
+
+void printFCFS(vector<Process> proc, string s2, int currentTime, int curProc){
+
+    ofstream out;
+    
+    out.open(s2, ios_base::app);
+
+    int empty = 0;
+
+    out << endl;
+
+    out << "t = " << currentTime << endl;
+
+    if (proc[curProc].arrivalTime == currentTime) {
+
+        out << "CPU: Loading process " << proc[curProc].pid << " (CPU burst = " << proc[curProc].burst << ")" << endl;
+
+    }
+    
+    else if (proc[curProc].startTime <= currentTime && proc[curProc].burst > 0) {
+
+        out << "CPU: Running process " << proc[curProc].pid << " (remaining CPU burst = " << proc[curProc].burst << ")" << endl;
+
+    } 
+    
+    else if (proc[curProc].burst == 0 && curProc + 1 > proc.size() - 2) {
+    
+        out << "CPU: Finishing process " << proc[curProc].pid << endl;
+
+    } 
+    
+    else if (proc[curProc].burst == 0) {
+    
+        out << "CPU: Finishing process " << proc[curProc].pid << "; loading process " << proc[curProc + 1].pid << " (CPU burst = " << proc[curProc + 1].burst << ")" << endl;
+
+    }
+
+    
+    out << "Ready queue: ";
+
+    for (int i = 0; i < proc.size() - 1; i++) {
+
+        
+        if(proc[i].arrivalTime <= currentTime && proc[i].burst > 0 && proc[i].startTime == -1){
+
+            out << proc[i].pid;
+
+            empty = 1; 
+
+            
+            if (i < proc.size() - 2 && proc[i + 1].arrivalTime <= currentTime) {
+
+                out << "-";
+
+            }
+
+        }
+
+    }
+
+    
+    if (empty == 0) {
+
+        out << "empty";
+
+    }
+
+    out << endl;
+    out.close();
+
+}
