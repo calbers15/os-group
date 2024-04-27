@@ -1,0 +1,38 @@
+[
+{
+  "directory": "C:/Users/cdog1/Documents/eece-4811/os-group/p1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g -Wall -Wextra -o CMakeFiles\\p1.dir\\main.c.obj -c C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\main.c",
+  "file": "C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\main.c",
+  "output": "CMakeFiles\\p1.dir\\main.c.obj"
+},
+{
+  "directory": "C:/Users/cdog1/Documents/eece-4811/os-group/p1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g -o CMakeFiles\\t1.dir\\test1.c.obj -c C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test1.c",
+  "file": "C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test1.c",
+  "output": "CMakeFiles\\t1.dir\\test1.c.obj"
+},
+{
+  "directory": "C:/Users/cdog1/Documents/eece-4811/os-group/p1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g -o CMakeFiles\\t2.dir\\test2.c.obj -c C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test2.c",
+  "file": "C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test2.c",
+  "output": "CMakeFiles\\t2.dir\\test2.c.obj"
+},
+{
+  "directory": "C:/Users/cdog1/Documents/eece-4811/os-group/p1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g -o CMakeFiles\\t3.dir\\test3.c.obj -c C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test3.c",
+  "file": "C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test3.c",
+  "output": "CMakeFiles\\t3.dir\\test3.c.obj"
+},
+{
+  "directory": "C:/Users/cdog1/Documents/eece-4811/os-group/p1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g -o CMakeFiles\\t4.dir\\test4.c.obj -c C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test4.c",
+  "file": "C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test4.c",
+  "output": "CMakeFiles\\t4.dir\\test4.c.obj"
+},
+{
+  "directory": "C:/Users/cdog1/Documents/eece-4811/os-group/p1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g -o CMakeFiles\\t5.dir\\test5.c.obj -c C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test5.c",
+  "file": "C:\\Users\\cdog1\\Documents\\eece-4811\\os-group\\p1\\test5.c",
+  "output": "CMakeFiles\\t5.dir\\test5.c.obj"
+}
+]

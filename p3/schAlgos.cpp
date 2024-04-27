@@ -237,25 +237,25 @@ void printFCFS(vector<Process> proc, string s2, int currentTime, int curProc){
 
     if (proc[curProc].arrivalTime == currentTime) {
 
-        out << "CPU: Loading process " << proc[curProc].pid << " (CPU burst = " << proc[curProc].burst << ")" << endl;
+        out << "CPU: Loading process " << proc[curProc].pid << " (CPU burst = " << proc[curProc].burstTime << ")" << endl;
 
     }
     
-    else if (proc[curProc].startTime <= currentTime && proc[curProc].burst > 0) {
+    else if (proc[curProc].startTime <= currentTime && proc[curProc].burstTime > 0) {
 
-        out << "CPU: Running process " << proc[curProc].pid << " (remaining CPU burst = " << proc[curProc].burst << ")" << endl;
+        out << "CPU: Running process " << proc[curProc].pid << " (remaining CPU burst = " << proc[curProc].burstTime << ")" << endl;
 
     } 
     
-    else if (proc[curProc].burst == 0 && curProc + 1 > proc.size() - 2) {
+    else if (proc[curProc].burstTime == 0 && curProc + 1 > proc.size() - 2) {
     
         out << "CPU: Finishing process " << proc[curProc].pid << endl;
 
     } 
     
-    else if (proc[curProc].burst == 0) {
+    else if (proc[curProc].burstTime == 0) {
     
-        out << "CPU: Finishing process " << proc[curProc].pid << "; loading process " << proc[curProc + 1].pid << " (CPU burst = " << proc[curProc + 1].burst << ")" << endl;
+        out << "CPU: Finishing process " << proc[curProc].pid << "; loading process " << proc[curProc + 1].pid << " (CPU burst = " << proc[curProc + 1].burstTime << ")" << endl;
 
     }
 
@@ -265,7 +265,7 @@ void printFCFS(vector<Process> proc, string s2, int currentTime, int curProc){
     for (int i = 0; i < proc.size() - 1; i++) {
 
         
-        if(proc[i].arrivalTime <= currentTime && proc[i].burst > 0 && proc[i].startTime == -1){
+        if(proc[i].arrivalTime <= currentTime && proc[i].burstTime > 0 && proc[i].startTime == -1){
 
             out << proc[i].pid;
 
