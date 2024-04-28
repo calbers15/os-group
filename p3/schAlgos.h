@@ -48,7 +48,7 @@ void printSJF(vector<Process> proc, string s2, int currentTime, int currentProce
 void printNPP(vector<Process> proc, string s2, int currentTime, int currentProcess);
 
 //priority scheduling function
-algorithmMetrics priority(vector<Process> processes, string s1, int numProccess, int interv);
+algorithmMetrics priority(vector<Process> processes, string s1, int numProcess, int interv);
 
 //shortest job first function
 algorithmMetrics sjf(vector<Process> processes, string s1, int numProcess, int interv);

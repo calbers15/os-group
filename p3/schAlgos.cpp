@@ -618,3 +618,125 @@ algorithmMetrics roundRobin(vector<Process> processes, string s1, int numProcess
 
     return metric; // Return the average metricistics object
 }
+
+algorithmMetrics stcf(vector<Process> processes, string s1, int numProcess, int interv){
+    ofstream out;
+    out.open(s1, ios_base::app);
+    algorithmMetrics metric;
+    int currentTime = 0;
+    int numFinishedProcesses = 0;
+    int currentProcess = findShortJob(processes, currentTime);
+    int tempId;
+    string procSeq = "";
+    int contextSw = 0;
+    float numProcessFloat = numProcess;
+    vector<Process> processCopy = processes;
+
+    out << endl;
+    out << "*** STCF Scheduling ***" << endl;
+    printSJF(processes, s1, currentTime, currentProcess);
+
+     while(numFinishedProcesses < numProcess) {
+
+        if (currentProcess != findShortJob(processes, currentTime)) {
+            tempId = processes[currentProcess].pid;
+            procSeq += to_string(tempId) + "-";
+            contextSw++;
+        }
+        currentProcess = findShortJob(processes, currentTime);
+
+        if (currentProcess != -1) { // If there's a valid process to run
+
+            if (processes[currentProcess].startTime == -1) { // If the process hasn't started yet
+
+                processes[currentProcess].startTime = currentTime; // Set the start time
+                processes[currentProcess].hasRun = 1; // Mark the process as started
+
+            }
+
+            processes[currentProcess].burstTime--;
+            currentTime++;
+
+            if (processes[currentProcess].burstTime == 0) {
+            
+                processes[currentProcess].turnaroundTime = currentTime - processes[currentProcess].arrivalTime;
+                processes[currentProcess].waitTime = processes[currentProcess].turnaroundTime - processCopy[currentProcess].burstTime;
+                numFinishedProcesses++;
+                
+
+            }
+
+            if (currentTime % interv == 0 || currentTime % interv == interv) {
+
+                printSJF(processes, s1, currentTime, currentProcess);
+
+            }
+
+        } 
+        
+        else {
+
+            currentTime++;
+
+            if (currentTime % interv == 0) {
+
+                printSJF(processes, s1, currentTime, currentProcess);
+                
+            }
+        }
+    }
+    tempId = processes[currentProcess].pid;
+    procSeq += to_string(tempId) + "-";
+    contextSw++;
+    procSeq.pop_back(); // Remove the last hyphen
+    metric.contextSwitches = contextSw;
+
+    out << endl;
+    out << "*********************************************************" << endl;
+    out << "STCF Summary (WT = wait time, TT = turnaround time):" << endl;
+    out << "PID     WT     TT" << endl;
+
+    for(int i = 0; i < numProcess; i++){
+
+        if(processes[i].waitTime < 10){
+
+            out << " " << processes[i].pid << "      " << processes[i].waitTime << "      " << processes[i].turnaroundTime << endl;
+        
+        }
+
+        if(processes[i].waitTime >= 10 && processes[i].waitTime < 100){
+
+            out << " " << processes[i].pid << "      " << processes[i].waitTime << "     " << processes[i].turnaroundTime << endl;
+        
+        }
+        if (processes[i].waitTime >= 100){
+
+            out << " " << processes[i].pid << "     " << processes[i].waitTime << "     " << processes[i].turnaroundTime << endl;
+        
+        }
+
+    }
+
+    for(int x = 0; x < numProcess; x++){
+
+        metric.avWait = metric.avWait + processes[x].waitTime;
+        metric.avTurnaround = metric.avTurnaround + processes[x].turnaroundTime;
+
+    }
+    metric.avWait = metric.avWait / numProcessFloat;
+    metric.avTurnaround = metric.avTurnaround / numProcessFloat;
+
+    out << "AVG" << "     " << metric.avWait << "   " << metric.avTurnaround << endl;
+
+    
+    metric.contextSwitches = contextSw;
+
+    out << endl;
+    out << endl;
+    out << "Process sequence: " << procSeq << endl;
+    out << "Context Switches: " << contextSw << endl;
+    out.close(); // Close the output file
+
+    return metric; // Return the average metricistics object
+
+}
