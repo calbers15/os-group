@@ -616,7 +616,7 @@ algorithmMetrics roundRobin(vector<Process> processes, string s1, int numProcess
     out << endl;
     out.close(); // Close the output file
 
-    return metric; // Return the average metricistics object
+    return metric; // Return the average algorithMetric object
 }
 
 algorithmMetrics stcf(vector<Process> processes, string s1, int numProcess, int interv){
@@ -737,6 +737,19 @@ algorithmMetrics stcf(vector<Process> processes, string s1, int numProcess, int 
     out << "Context Switches: " << contextSw << endl;
     out.close(); // Close the output file
 
-    return metric; // Return the average metricistics object
+    return metric; // Return the average algorithmMetric object
 
+}
+
+algorithmMetrics NPP(vector<Process> processes, string s1, int numProcess, int interv){
+    
+    ofstream out;
+    int tempId;
+
+    out.open(s1, ios_base::app);
+
+    algorithmMetrics metric;
+    int currentTime = 0;
+    int numFinishedProcesses = 0;
+    int currentProcess = findPriority(processes, currentTime);
 }
