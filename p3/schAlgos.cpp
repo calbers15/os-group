@@ -924,3 +924,15 @@ algorithmMetrics fcfs(vector<Process> processes, string s1, int numProcess, int 
 
     return metric;
 }
+
+bool WTComp(algorithmMetrics x, algorithmMetrics y){
+    return x.avWait < y.avWait;
+}
+
+bool TTComp(algorithmMetrics x, algorithmMetrics y){
+    return x.avTurnaround < y.avTurnaround;
+}
+
+bool CSComp(algorithmMetrics x, algorithmMetrics y){
+    return x.contextSwitches < y.contextSwitches;
+}
