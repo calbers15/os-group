@@ -833,3 +833,94 @@ algorithmMetrics NPP(vector<Process> processes, string s1, int numProcess, int i
     return metric;
 }
 
+algorithmMetrics fcfs(vector<Process> processes, string s1, int numProcess, int interv){
+
+    ofstream out;
+    out.open(s1, ios_base::app);
+
+    algorithmMetrics metric;
+    int currentTime = 0;
+    int i = 0;
+    int currentProcess = 0;
+    float numProcessFloat = numProcess;
+    string procSeq = "";
+    int tempId = 0;
+    int contextSw = 0;
+
+    out << "*** FCFS Scheduling ***" << endl;
+
+    while(i < numProcess){
+
+        if(processes[currentProcess].arrivalTime <= currentTime){
+
+            if(processes[currentProcess].arrivalTime == currentTime){
+
+                if((currentTime % interv == 0) || (currentTime & interv == interv)){
+                    printFCFS;
+                }
+
+                currentTime++;
+
+            }
+
+            while(processes[currentProcess].burstTime > 0){
+
+                if(processes[currentProcess].startTime == -1){
+                    processes[currentProcess].startTime = currentTime;
+                    processes[currentProcess].waitTime = currentTime - processes[currentProcess].arrivalTime;
+                    processes[currentProcess].turnaroundTime = processes[currentProcess].waitTime + processes[currentProcess].burstTime;
+                }
+
+                processes[currentProcess].burstTime = processes[currentProcess].burstTime - 1;
+
+                if((currentTime % interv == 0) || (currentTime % interv == interv)){
+                    printFCFS(processes, s1, currentTime, currentProcess);
+                }
+
+                currentTime++;
+            }
+
+            tempId = processes[currentProcess].pid;
+            procSeq = procSeq + to_string(tempId) + "-";
+            contextSw++;
+            currentProcess++;
+        }
+
+        i++;
+    }
+
+    out << endl;
+    out << "*********************************************************" << endl;
+    out << "FCFS Summary (WT = Wait time, TT = turnaround time):" << endl;
+    out << "PID     WT     TT" << endl;
+
+    for(i = 0; i < numProcess; i++){
+        if(processes[i].waitTime - 1  < 10){
+            out << " " << processes[i].pid << "      " << processes[i].waitTime - 1 << "      " << processes[i].turnaroundTime - 1 << endl;
+        }
+        if(processes[i].waitTime - 1 >= 10){
+            out << " " << processes[i].pid << "      " << processes[i].waitTime - 1 << "      " << processes[i].turnaroundTime - 1 << endl;
+        }
+    }
+
+    for(int x = 0; x < numProcess; x++){
+        metric.avWait = metric.avWait + processes[x].waitTime - 1;
+        metric.avTurnaround = metric.avTurnaround + processes[x].turnaroundTime - 1;
+    }
+
+    metric.avWait = metric.avWait / numProcessFloat;
+    metric.avTurnaround = metric.avTurnaround / numProcessFloat;
+
+    out << "AVG" << "      " << metric.avWait << "   " << metric.avTurnaround << endl;
+
+    out << endl;
+    out << endl;
+    metric.contextSwitches = contextSw;
+    procSeq.pop_back();
+    out << "Process sequence: " << procSeq << endl;
+    out << "Context switches: " << contextSw << endl;
+
+    out.close();
+
+    return metric;
+}
