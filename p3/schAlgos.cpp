@@ -22,7 +22,7 @@ int findShortJob(vector<Process> processes, int currentTime){
     return min_index;
 }
 
-int findprocPri(vector<Process> processes, int currentTime){
+int findPriority(vector<Process> processes, int currentTime){
     int min_burstTime = -1;
     int min_index = -1;
 
@@ -134,12 +134,12 @@ void printNPP(vector<Process> proc, string s2, int currentTime, int currentProce
         out << "CPU: Running process " << proc[currentProcess].pid << " (remaining CPU burstTime = " << proc[currentProcess].burstTime << ")" << endl;
     }
 
-    else if(proc[currentProcess].burstTime == 0 && findprocPri(proc, currentTime) == -1){
+    else if(proc[currentProcess].burstTime == 0 && findPriority(proc, currentTime) == -1){
         out << "CPU: Finishing process " << proc[currentProcess].pid << endl;
     }
 
     else if(proc[currentProcess].burstTime == 0){
-        out << "CPU: Finishing process " << proc[currentProcess].pid << "; loading process " << proc[findprocPri(proc, currentTime)].pid << " (CPU burstTime = " << proc[findprocPri(proc, currentTime)].burstTime << ")" << endl;
+        out << "CPU: Finishing process " << proc[currentProcess].pid << "; loading process " << proc[findPriority(proc, currentTime)].pid << " (CPU burstTime = " << proc[findPriority(proc, currentTime)].burstTime << ")" << endl;
     }
 
     out << "ready queue: ";
@@ -150,14 +150,14 @@ void printNPP(vector<Process> proc, string s2, int currentTime, int currentProce
 
         if (proc[x].arrivalTime <= currentTime && proc[x].burstTime > 0 && proc[x].startTime == -1) {
 
-            if(proc[findprocPri(proc, currentTime - 1)].burstTime > 0 && findprocPri(proc, currentTime - 1) != currentProcess && proc[findprocPri(proc, currentTime - 1)].burstTime && finished == 0){
+            if(proc[findPriority(proc, currentTime - 1)].burstTime > 0 && findPriority(proc, currentTime - 1) != currentProcess && proc[findPriority(proc, currentTime - 1)].burstTime && finished == 0){
 
-                readyProc.push_back(proc[findprocPri(proc, currentTime - 1)]);
+                readyProc.push_back(proc[findPriority(proc, currentTime - 1)]);
                 finished = 1;
 
             }
 
-            if(proc[x].pid != proc[findprocPri(proc, currentTime - 1)].pid){
+            if(proc[x].pid != proc[findPriority(proc, currentTime - 1)].pid){
 
                 readyProc.push_back(proc[x]);
 
@@ -752,4 +752,84 @@ algorithmMetrics NPP(vector<Process> processes, string s1, int numProcess, int i
     int currentTime = 0;
     int numFinishedProcesses = 0;
     int currentProcess = findPriority(processes, currentTime);
+    string procSeq;
+    int contextSw;
+    float numProcessFloat = numProcess;
+
+    out << endl;
+
+    out << "*** Priority Scheduling ***" << endl;
+
+    printNPP(processes, s1, currentTime, currentProcess);
+
+    while(numFinishedProcesses < numProcess){
+        currentProcess = findPriority(processes, currentTime);
+
+        if(currentProcess != -1){
+            processes[currentProcess].startTime = currentTime;
+            processes[currentProcess].waitTime = currentTime - processes[currentProcess].arrivalTime;
+            processes[currentProcess].turnaroundTime = processes[currentProcess].waitTime + processes[currentProcess].burstTime;
+
+            while(processes[currentProcess].burstTime > 0){
+                processes[currentProcess].burstTime--;
+                currentTime++;
+
+                if(currentTime % interv == 0 || currentTime % interv == interv){
+                    printNPP(processes, s1, currentTime, currentProcess);
+                }
+            }
+
+            numFinishedProcesses++;
+            tempId = processes[currentProcess].pid;
+            procSeq += to_string(tempId) + "-";
+            contextSw++;
+        }
+
+        else{
+            currentTime++;
+
+            if(currentTime % interv == 0){
+                printNPP(processes, s1, currentTime, currentProcess);
+            }
+        }
+    }
+
+    procSeq.pop_back();
+    metric.contextSwitches = contextSw;
+
+    out << endl;
+    out << "*********************************************************" << endl;
+    out << "Priority Summary (WT = wait time, TT = turnaround time):" << endl;
+    out << "PID     WT     TT" << endl;
+
+    for(int i = 0; i < numProcess; i++){
+        if(processes[i].waitTime < 10){
+            out << " " << processes[i].pid << "      " << processes[i].waitTime << "      " << processes[i].turnaroundTime << endl;
+        }
+
+        if(processes[i].waitTime >= 10 && processes[i].waitTime < 100){
+            out << " " << processes[i].pid << "      " << processes[i].waitTime << "      " << processes[i].turnaroundTime << endl;
+        }
+
+        if(processes[i].waitTime >= 100){
+            out << " " << processes[i].pid << "      " << processes[i].waitTime << "      " << processes[i].turnaroundTime << endl;
+        }
+    }
+
+    for(int x = 0; x < numProcess; x++){
+        metric.avWait = metric.avWait + processes[x].waitTime;
+        metric.avTurnaround = metric.avTurnaround + processes[x].turnaroundTime;
+    }
+
+    metric.avWait = metric.avWait / numProcessFloat;
+    metric.avTurnaround = metric.avTurnaround / numProcessFloat;
+
+    out << "AVG" << "     " << metric.avWait << "   " << metric.avTurnaround << endl;
+
+    out << "Process sequence: " << procSeq << endl;
+    out << "Context switches: " << contextSw << endl;
+    out.close();
+
+    return metric;
 }
+
