@@ -1,0 +1,44 @@
+Process 0 started
+P0 OPERATION: R r0 0
+P0: page 0 not resident in memory
+P0: using free frame 0
+P0: new translation from page 0 to frame 0
+P0: translated VA 0x to PA 0x
+P0: r0 = 0x329 (mem at virtual addr 0x)
+P0 OPERATION: W r0 32
+P0: page 1 not resident in memory
+P0: using free frame 1
+P0: new translation from page 1 to frame 1
+P0: translated VA 0x20 to PA 0x20
+P0: main memory address 0x20 now holds = 0x329 from register r0
+P0 OPERATION: R r1 32
+P0: valid translation from page1 to frame 1
+P0: translated VA 0x20 to PA 0x20
+P0: r1 = 0x149 (mem at virtual address 0x20)
+P0 OPERATION: W r1 64
+P0: page 2 not resident in memory
+P0: using free frame 2
+P0: new translation from page 2 to frame 2
+P0: translated VA 0x40 to PA 0x40
+P0: main memory address 0x40 now holds = 0x149 from register r1
+P0 OPERATION: R r2 64
+P0: valid translation from page2 to frame 2
+P0: translated VA 0x40 to PA 0x40
+P0: r2 = 0x95 (mem at virtual address 0x40)
+P0 OPERATION: W r2 96
+P0: page 3 not resident in memory
+P0: using free frame 3
+P0: new translation from page 3 to frame 3
+P0: translated VA 0x60 to PA 0x60
+P0: main memory address 0x60 now holds = 0x95 from register r2
+P0 OPERATION: R r3 96
+P0: valid translation from page3 to frame 3
+P0: translated VA 0x60 to PA 0x60
+P0: r3 = 0x5F (mem at virtual address 0x60)
+P0 OPERATION: W r3 128
+P0: page 4 not resident in memory
+P0: using free frame 4
+P0: new translation from page 4 to frame 4
+P0: translated VA 0x80 to PA 0x80
+P0: main memory address 0x80 now holds = 0x5F from register r3
+Main: progarm complete
