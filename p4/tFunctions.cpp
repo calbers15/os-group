@@ -55,6 +55,14 @@ string intToHexadecimal(int n){         //function from https://www.geeksforgeek
 }
 
 void evict(int threadNum, string outFile, int pageSize){
+    string mainMemory[10000];
+    vector<FrameData> freeFrames;
+    vector<FrameData> frameTable;
+    vector<PageTable> pageTable;
+    vector<PageTable> pageTable2;
+    vector<PageTable> pageTable3;
+    vector<PageTable> pageTable4;
+    
     ofstream out;
     out.open(outFile, ios_base::app);
 

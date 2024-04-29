@@ -11,14 +11,14 @@
 using namespace std;
 
 //Globals (mirrored from tFunctions.cpp)
-extern string mainMemory[10000];
-extern vector<FrameData> freeFrames;
-extern vector<FrameData> frameTable;
-extern vector<PageTable> pageTable;
-extern vector<PageTable> pageTable2;
-extern vector<PageTable> pageTable3;
-extern vector<PageTable> pageTable4;
-extern sem_t semaphore;
+string mainMemory[10000];
+vector<FrameData> freeFrames;
+vector<FrameData> frameTable;
+vector<PageTable> pageTable;
+vector<PageTable> pageTable2;
+vector<PageTable> pageTable3;
+vector<PageTable> pageTable4;
+sem_t semaphore;
 
 int main (int argc, char *argv[]){
     string inputFile, outputFile;
@@ -94,6 +94,6 @@ int main (int argc, char *argv[]){
 
     in.close();
     out.close();
-    
+
     return 0;
 }
