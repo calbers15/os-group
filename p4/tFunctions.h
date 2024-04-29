@@ -26,7 +26,7 @@ class FrameData{
         int physicalAddress = 0;
 };
 
-string toHexadecimal(int num);
+string intToHexadecimal(int num);
 
 void evict(int threadNumber, string outputFile, int pageSize);
 
