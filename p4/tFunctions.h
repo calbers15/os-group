@@ -1,3 +1,8 @@
+/*Cameron Albers, Austin Silva
+  EECE.4811 - Operating Systems
+  Michael Geiger, Yongshun Xu
+  Project 4 - Memory Management Simulator*/
+
 #ifndef TFUNCTIONS_H
 #define TFUNCTIONS_H
 
