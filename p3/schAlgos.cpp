@@ -741,7 +741,7 @@ algorithmMetrics stcf(vector<Process> processes, string s1, int numProcess, int 
 
 }
 
-algorithmMetrics NPP(vector<Process> processes, string s1, int numProcess, int interv){
+algorithmMetrics priority(vector<Process> processes, string s1, int numProcess, int interv){
     
     ofstream out;
     int tempId;
