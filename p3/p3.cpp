@@ -1,3 +1,9 @@
+/*Cameron Albers, Austin Silva
+  EECE.4811 - Operating Systems
+  Michael Geiger, Yongshun Xu
+  Project 3 - Scheduling Algorithms*/
+
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -9,7 +15,7 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     
-    string s, ss;
+    string arg1, arg2;
     vector<Process> proc;
     int id = 0;
     int interv;
@@ -23,14 +29,14 @@ int main(int argc, char *argv[]){
     int metricsSize = 0;
     
     
-    s = argv[1];
-    ss = argv[2];
+    arg1 = argv[1];
+    arg2 = argv[2];
     interv = atoi(argv[3]);
 
-    ifstream in(s);
+    ifstream in(arg1);
     ofstream out;
 
-    out.open(ss, ios_base::app);
+    out.open(arg2, ios_base::app);
 
     while(!in.eof()){
         
@@ -48,11 +54,11 @@ int main(int argc, char *argv[]){
     in.close();
     int n = proc.size() - 1;
 
-    fcfsMetric = fcfs(proc, ss, n, interv);
-    sjfMetric = sjf(proc, ss, n, interv);
-    stcfMetric = stcf(proc, ss, n, interv);
-    roundRobinMetric = roundRobin(proc, ss, n, interv, 2);
-    priorityMetric = priority(proc, ss, n, interv);
+    fcfsMetric = fcfs(proc, arg2, n, interv);
+    sjfMetric = sjf(proc, arg2, n, interv);
+    stcfMetric = stcf(proc, arg2, n, interv);
+    roundRobinMetric = roundRobin(proc, arg2, n, interv, 2);
+    priorityMetric = priority(proc, arg2, n, interv);
 
     metrics.push_back(stcfMetric);
     metrics.push_back(sjfMetric);
@@ -187,6 +193,6 @@ int main(int argc, char *argv[]){
     }
 
     out.close();
-    
+
     return 0;
 }

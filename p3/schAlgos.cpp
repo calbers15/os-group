@@ -1,3 +1,8 @@
+/*Cameron Albers, Austin Silva
+  EECE.4811 - Operating Systems
+  Michael Geiger, Yongshun Xu
+  Project 3 - Scheduling Algorithms*/
+
 #include <iostream>
 #include <fstream>
 #include <vector>
